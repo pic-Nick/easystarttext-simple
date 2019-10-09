@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">EasyStart Text Simple</string>
+    <string name="logo">Logo</string>
+    <string name="button_start">Start</string>
+    <string name="title_activity_start">Start</string>
+
+    <!-- Preference titles -->
+    <string name="messages_header">Messages</string>
+    <string name="start_header">Start</string>
+
+    <!-- Preference texts -->
+    <string name="start_duration">Duration</string>
+    <string name="start_mode">Warm salon</string>
+    <string name="start_mode_summary_off">No. Only warm up the engine</string>
+    <string name="start_mode_summary_on">Yes. Warm up the engine and the salon</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Messages preferences -->
+    <string name="dev_phone_num">Device phone number</string>
+
+    <string name="menu_settings">Settings</string>
+
+    <!-- Preferences keys -->
+    <string name="pref_phone_number_key">dev_phone_num</string>
+    <string name="pref_duration_key">start_duration</string>
+    <string name="pref_warm_salon_key">start_warm_salon</string>
+
+    <!-- Messages -->
+    <string name="msg_need_configure_phone">You need to configure heater\'s phone number</string>
+    <string name="msg_explain_sms_permission">Permission to send SMS massages is essential for this application. Application sends commands to heater via SMS messages. Please grant this permission for the application to work.</string>
+    <string name="msg_failed_sms_permission">Permission to send SMS is essential for this application.</string>
+</resources>

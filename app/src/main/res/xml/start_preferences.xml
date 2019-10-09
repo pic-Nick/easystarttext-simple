@@ -1,0 +1,23 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/start_header">
+
+        <ListPreference
+                app:defaultValue="20"
+                app:entries="@array/start_values"
+                app:entryValues="@array/start_values"
+                app:key="@string/pref_duration_key"
+                app:title="@string/start_duration"
+                android:inputType="numberDecimal"
+                app:useSimpleSummaryProvider="true" />
+
+            <SwitchPreferenceCompat
+                app:key="@string/pref_warm_salon_key"
+                app:title="@string/start_mode"
+                app:summaryOff="@string/start_mode_summary_off"
+                app:summaryOn="@string/start_mode_summary_on" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
