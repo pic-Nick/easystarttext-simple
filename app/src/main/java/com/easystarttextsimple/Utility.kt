@@ -55,12 +55,14 @@ class Utility {
             return true
         }
 
-        fun sendSmsCommand(phone: String, command: String) {
-            try {
+        fun sendSmsCommand(phone: String, command: String) : Boolean {
+            return try {
                 val smsManager = SmsManager.getDefault()
                 smsManager.sendTextMessage(phone, null, command, null, null)
+                true
             } catch (e: Exception) {
                 val msg = e.message
+                false
             }
         }
 

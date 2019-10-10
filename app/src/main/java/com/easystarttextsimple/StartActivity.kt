@@ -3,6 +3,7 @@ package com.easystarttextsimple
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
@@ -56,7 +57,8 @@ class StartActivity : AppCompatActivity() {
             val warmUpSalon = sharedPreferences.getBoolean(getString(R.string.pref_warm_salon_key), false)
             val command = Utility.composeStartCommand(startDuration, warmUpSalon)
             if (Utility.tryRequestSmsPermission(this, MY_PERMISSIONS_REQUEST_SEND_START_SMS))
-                Utility.sendSmsCommand(phoneNumber, command)
+                if (Utility.sendSmsCommand(phoneNumber, command))
+                    Toast.makeText(this, R.string.msg_command_sent, Toast.LENGTH_LONG).show()
         }
     }
 
