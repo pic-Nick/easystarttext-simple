@@ -9,17 +9,19 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
+        val settingsGroups = intent.getIntArrayExtra(EXTRA_SETTINGS_GROUPS)
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.settings, SettingsFragment())
+            .replace(R.id.settings, SettingsFragment(settingsGroups))
             .commit()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    class SettingsFragment : PreferenceFragmentCompat() {
+    class SettingsFragment(settingsGroups: IntArray?) : PreferenceFragmentCompat() {
+        private val sGroups = settingsGroups
+
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey)
-            addPreferencesFromResource(R.xml.start_preferences)
+            sGroups?.forEach { addPreferencesFromResource(it) }
         }
     }
 }

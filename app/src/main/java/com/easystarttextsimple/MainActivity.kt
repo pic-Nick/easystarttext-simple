@@ -1,11 +1,15 @@
 package com.easystarttextsimple
 
+import android.Manifest
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.preference.PreferenceManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_settings -> {
                 intent = Intent(this, SettingsActivity::class.java)
+                    .putExtra(EXTRA_SETTINGS_GROUPS, intArrayOf(R.xml.root_preferences, R.xml.start_preferences))
                 startActivity(intent)
                 true
             }
@@ -36,5 +41,24 @@ class MainActivity : AppCompatActivity() {
     fun startActivityTap(view: View){
         intent = Intent(this, StartActivity::class.java)
         startActivity(intent)
+    }
+
+    fun stopActivityTap(view: View){
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage(R.string.msg_confirm_stop_request)
+            .setPositiveButton(R.string.button_yes) { dialog, _ ->
+                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+                val phoneNumber = Utility.tryGetPhoneNumber(this, sharedPreferences)
+                if (phoneNumber != null) {
+                    val command = Utility.composeStopCommand()
+                    if (Utility.tryRequestSmsPermission(this, MY_PERMISSIONS_REQUEST_SEND_STOP_SMS))
+                        Utility.sendSmsCommand(phoneNumber, command)
+                }
+                dialog.dismiss()
+            }
+            .setNegativeButton(R.string.button_no) { dialog, _ ->
+                dialog.dismiss()
+            }
+        builder.create().show()
     }
 }
