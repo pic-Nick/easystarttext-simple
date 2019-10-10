@@ -1,6 +1,5 @@
 package com.easystarttextsimple
 
-import android.Manifest
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,14 +7,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
 import androidx.preference.PreferenceManager
 
 class MainActivity : AppCompatActivity() {
+    var smsBReceiver: SMSBReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        smsBReceiver = SMSBReceiver()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_settings -> {
                 intent = Intent(this, SettingsActivity::class.java)
-                    .putExtra(EXTRA_SETTINGS_GROUPS, intArrayOf(R.xml.root_preferences, R.xml.start_preferences))
                 startActivity(intent)
                 true
             }

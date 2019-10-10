@@ -24,7 +24,7 @@ class Utility {
             return if (phoneNumber?.isNotBlank() == true) phoneNumber else {
                 Toast.makeText(parentActivity, R.string.msg_need_configure_phone, Toast.LENGTH_LONG).show()
                 parentActivity.startActivity(Intent(parentActivity, SettingsActivity::class.java)
-                    .putExtra(EXTRA_SETTINGS_GROUPS, intArrayOf(R.xml.root_preferences)))
+                    .putExtra(EXTRA_SETTINGS_GROUPS, intArrayOf(R.xml.msg_preferences)))
                 null
             }
         }

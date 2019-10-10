@@ -21,7 +21,12 @@ class SettingsActivity : AppCompatActivity() {
         private val sGroups = settingsGroups
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            sGroups?.forEach { addPreferencesFromResource(it) }
+            if (sGroups != null)
+                sGroups.forEach { addPreferencesFromResource(it) }
+            else {
+                addPreferencesFromResource(R.xml.msg_preferences)
+                addPreferencesFromResource(R.xml.start_preferences)
+            }
         }
     }
 }
