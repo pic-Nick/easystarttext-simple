@@ -31,8 +31,7 @@ class Utility {
 
         fun tryRequestSmsPermission(activity: Activity, requestCode : Int) : Boolean {
             if (ContextCompat.checkSelfPermission(activity, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-                // Permission is not granted
-                // Should we show an explanation?
+                // Permission is not granted. Should we show an explanation?
                 if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.SEND_SMS)) {
                     // Show an explanation to the user *asynchronously* -- don't block
                     // this thread waiting for the user's response! After the user
@@ -41,14 +40,14 @@ class Utility {
                     builder.setMessage(R.string.msg_explain_sms_permission)
                         .setCancelable(false)
                         .setNegativeButton("OK") { dialog, _ ->
-                            ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.SEND_SMS), requestCode)
+                            ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.SEND_SMS, Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_SMS), requestCode)
                             dialog.dismiss()
                         }
                     builder.create().show()
                     return false
                 } else {
                     // No explanation needed, we can request the permission.
-                    ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.SEND_SMS), requestCode)
+                    ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.SEND_SMS, Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_SMS), requestCode)
                     return false
                 }
             }
