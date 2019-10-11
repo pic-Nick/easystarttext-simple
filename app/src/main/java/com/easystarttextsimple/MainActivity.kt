@@ -2,11 +2,14 @@ package com.easystarttextsimple
 
 import android.Manifest
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.Telephony
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -18,8 +21,34 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED)
-            smsBReceiver = SMSBReceiver()
+    }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED)
+            initSmsReceiver()
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+    }
+
+    override fun onDestroy() {
+        smsBReceiver?.setListener(null)
+        unregisterReceiver(smsBReceiver)
+        super.onDestroy()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -50,6 +79,7 @@ class MainActivity : AppCompatActivity() {
                     MY_PERMISSIONS_REQUEST_SEND_STOP_SMS -> sendSimpleCommand(MY_PERMISSIONS_REQUEST_SEND_STOP_SMS)
                     MY_PERMISSIONS_REQUEST_SEND_STATUS_SMS -> sendSimpleCommand(MY_PERMISSIONS_REQUEST_SEND_STATUS_SMS)
                 }
+                initSmsReceiver()
             } else {
                 // permission denied, boo! Disable the functionality that depends on this permission.
                 val builder = AlertDialog.Builder(this)
@@ -80,7 +110,8 @@ class MainActivity : AppCompatActivity() {
                         else -> ""
                     }
                     if (command.isNotBlank() && Utility.tryRequestSmsPermission(this, requestCode))
-                        Utility.sendSmsCommand(phoneNumber, command)
+                        if (Utility.sendSmsCommand(phoneNumber, command))
+                            Toast.makeText(this, R.string.msg_command_sent, Toast.LENGTH_LONG).show()
                 }
                 dialog.dismiss()
             }
@@ -88,6 +119,18 @@ class MainActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
         builder.create().show()
+    }
+
+    private fun initSmsReceiver() {
+        if (smsBReceiver != null) return
+        smsBReceiver = SMSBReceiver()
+        registerReceiver(smsBReceiver, IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION))
+        smsBReceiver!!.setListener(object : SMSBReceiver.Listener {
+            override fun onTextReceived(text: String) {
+                if (!Utility.tryParseStatus(this@MainActivity, text))
+                    return
+            }
+        })
     }
 
     fun startActivityTap(view: View){

@@ -25,7 +25,7 @@ class SMSBReceiver : BroadcastReceiver() {
         }
     }
 
-    fun setListener(listener: Listener) {
+    fun setListener(listener: Listener?) {
         this.listener = listener
     }
 

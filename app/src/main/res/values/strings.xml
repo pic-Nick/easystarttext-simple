@@ -9,6 +9,7 @@
     <string name="button_status">Status</string>
     <string name="button_yes">Yes</string>
     <string name="button_no">No</string>
+    <string name="button_ok">OK</string>
 
     <string name="title_activity_start">Start</string>
 
@@ -39,4 +40,12 @@
     <string name="msg_failed_sms_permission">Permission to send SMS is essential for this application.</string>
     <string name="msg_confirm_request">Please, confirm your request to the heater.</string>
     <string name="msg_command_sent">Command has been sent</string>
+    <string name="msg_operation_status">Operation status</string>
+
+    <string name="msg_oper_running_with_salon">Running with salon heating.</string>
+    <string name="msg_oper_running_without_salon">Running without salon heating.</string>
+    <string name="msg_oper_off">Switched off.</string>
+    <string name="msg_oper_error">Encountered error.</string>
+    <string name="msg_oper_temperature">\nCoolant temperature</string>
+    <string name="msg_oper_voltage">\nOn-board voltage</string>
 </resources>

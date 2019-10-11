@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sms_status_on">ON</string>
+    <string name="sms_status_off">OFF</string>
+    <string name="sms_status_error">ERROR</string>
+    <string name="sms_status_t">T</string>
+    <string name="sms_status_v">V</string>
+    <string name="sms_status_ws">*</string>
+    <string name="sms_status_wos">#</string>
+</resources>
