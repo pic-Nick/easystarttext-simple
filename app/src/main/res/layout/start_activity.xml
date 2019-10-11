@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:onClick="sendStartCommandTap"
-        android:text="@string/button_start"
+        android:text="@string/button_send"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
