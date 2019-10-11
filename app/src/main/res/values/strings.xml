@@ -1,11 +1,15 @@
 <resources>
     <string name="app_name">EasyStart Text Simple</string>
     <string name="logo">Logo</string>
+
+    <!-- Buttons titles -->
     <string name="button_start">Start</string>
     <string name="button_send">Send command</string>
     <string name="button_stop">Stop</string>
+    <string name="button_status">Status</string>
     <string name="button_yes">Yes</string>
     <string name="button_no">No</string>
+
     <string name="title_activity_start">Start</string>
 
     <!-- Preference titles -->
@@ -33,6 +37,6 @@
     <string name="msg_need_configure_phone">You need to configure heater\'s phone number</string>
     <string name="msg_explain_sms_permission">Permission to send SMS massages is essential for this application. Application sends commands to heater via SMS messages. Please grant this permission for the application to work.</string>
     <string name="msg_failed_sms_permission">Permission to send SMS is essential for this application.</string>
-    <string name="msg_confirm_stop_request">Please, confirm your request to stop heater.</string>
+    <string name="msg_confirm_request">Please, confirm your request to the heater.</string>
     <string name="msg_command_sent">Command has been sent</string>
 </resources>

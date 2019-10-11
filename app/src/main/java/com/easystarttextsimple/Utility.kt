@@ -10,10 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import java.lang.Exception
 
 const val MY_PERMISSIONS_REQUEST_SEND_START_SMS = 1000
-const val MY_PERMISSIONS_REQUEST_SEND_STOP_SMS = 1000
+const val MY_PERMISSIONS_REQUEST_SEND_STOP_SMS = 1001
+const val MY_PERMISSIONS_REQUEST_SEND_STATUS_SMS = 1002
 
 const val EXTRA_SETTINGS_GROUPS = "com.easystarttextsimple.EXTRA_SETTINGS_GROUPS"
 
@@ -72,6 +72,10 @@ class Utility {
 
         fun composeStopCommand(): String {
             return "00*"
+        }
+
+        fun composeStatusCommand(): String {
+            return "09*"
         }
     }
 }

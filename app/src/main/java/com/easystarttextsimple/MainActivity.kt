@@ -1,12 +1,12 @@
 package com.easystarttextsimple
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 
 class MainActivity : AppCompatActivity() {
@@ -37,20 +37,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun startActivityTap(view: View){
-        intent = Intent(this, StartActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun stopActivityTap(view: View){
+    private fun SimpleCommand(requestCode: Int) {
         val builder = AlertDialog.Builder(this)
-        builder.setMessage(R.string.msg_confirm_stop_request)
+        builder.setMessage(R.string.msg_confirm_request)
             .setPositiveButton(R.string.button_yes) { dialog, _ ->
                 val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
                 val phoneNumber = Utility.tryGetPhoneNumber(this, sharedPreferences)
                 if (phoneNumber != null) {
-                    val command = Utility.composeStopCommand()
-                    if (Utility.tryRequestSmsPermission(this, MY_PERMISSIONS_REQUEST_SEND_STOP_SMS))
+                    val command = when (requestCode) {
+                        MY_PERMISSIONS_REQUEST_SEND_STOP_SMS -> Utility.composeStopCommand()
+                        MY_PERMISSIONS_REQUEST_SEND_STATUS_SMS -> Utility.composeStatusCommand()
+                        else -> ""
+                    }
+                    if (command.isNotBlank() && Utility.tryRequestSmsPermission(this, requestCode))
                         Utility.sendSmsCommand(phoneNumber, command)
                 }
                 dialog.dismiss()
@@ -59,5 +58,18 @@ class MainActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
         builder.create().show()
+    }
+
+    fun startActivityTap(view: View){
+        intent = Intent(this, StartActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun stopActivityTap(view: View){
+        SimpleCommand(MY_PERMISSIONS_REQUEST_SEND_STOP_SMS)
+    }
+
+    fun statusActivityTab(view: View) {
+        SimpleCommand(MY_PERMISSIONS_REQUEST_SEND_STATUS_SMS)
     }
 }

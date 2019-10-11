@@ -46,4 +46,17 @@
         app:layout_constraintStart_toEndOf="@+id/startButton"
         app:layout_constraintTop_toBottomOf="@+id/logoImage" />
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="0dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="statusActivityTab"
+        android:text="@string/button_status"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
