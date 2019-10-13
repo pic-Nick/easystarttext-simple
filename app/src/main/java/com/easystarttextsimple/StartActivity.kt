@@ -34,7 +34,7 @@ class StartActivity : AppCompatActivity() {
                 val builder = AlertDialog.Builder(this)
                 builder.setMessage(R.string.msg_failed_sms_permission)
                     .setCancelable(false)
-                    .setNegativeButton("OK") { dialog, _ -> dialog?.dismiss() }
+                    .setNegativeButton(R.string.button_ok) { dialog, _ -> dialog?.dismiss() }
                 builder.create().show()
             }
         }

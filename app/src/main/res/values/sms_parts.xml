@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="sms_start">START</string>
     <string name="sms_status_on">ON</string>
     <string name="sms_status_off">OFF</string>
     <string name="sms_status_error">ERROR</string>

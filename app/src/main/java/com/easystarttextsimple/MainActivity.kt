@@ -127,7 +127,9 @@ class MainActivity : AppCompatActivity() {
         registerReceiver(smsBReceiver, IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION))
         smsBReceiver!!.setListener(object : SMSBReceiver.Listener {
             override fun onTextReceived(text: String) {
-                if (!Utility.tryParseStatus(this@MainActivity, text))
+                if (Utility.tryParseStart(this@MainActivity, text))
+                    return
+                if (Utility.tryParseStatus(this@MainActivity, text))
                     return
             }
         })
