@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.telephony.SmsManager
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -16,6 +17,7 @@ const val MY_PERMISSIONS_REQUEST_SEND_STOP_SMS = 1001
 const val MY_PERMISSIONS_REQUEST_SEND_STATUS_SMS = 1002
 
 const val EXTRA_SETTINGS_GROUPS = "com.easystarttextsimple.EXTRA_SETTINGS_GROUPS"
+const val TAG = "Util"
 
 class Utility {
     companion object {
@@ -113,7 +115,7 @@ class Utility {
                 smsManager.sendTextMessage(phone, null, command, null, null)
                 true
             } catch (e: Exception) {
-                val msg = e.message
+                Log.e(TAG, e.message, e)
                 false
             }
         }

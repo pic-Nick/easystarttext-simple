@@ -4,10 +4,10 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
-import androidx.appcompat.app.AlertDialog
 
 class StartActivity : AppCompatActivity() {
 
@@ -21,6 +21,28 @@ class StartActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+    override fun onResume() {
+        super.onResume()
+        val estsApp = this.application
+        if (estsApp is ESTSApplication) estsApp.attachSmsListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         fun processPermissionRequest(myPermissionsRequestCode: Int) {
             // If request is cancelled, the result arrays are empty.
@@ -28,6 +50,11 @@ class StartActivity : AppCompatActivity() {
                 // permission was granted, yay! Do it.
                 when (myPermissionsRequestCode) {
                     MY_PERMISSIONS_REQUEST_SEND_START_SMS -> sendStartCommand()
+                }
+                val estsApp = this.application
+                if (estsApp is ESTSApplication) {
+                    estsApp.initSmsReceiver()
+                    estsApp.attachSmsListener(this)
                 }
             } else {
                 // permission denied, boo! Disable the functionality that depends on this permission.

@@ -1,22 +1,17 @@
 package com.easystarttextsimple
 
-import android.Manifest
 import android.content.Intent
-import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.provider.Telephony
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 
 class MainActivity : AppCompatActivity() {
-    var smsBReceiver: SMSBReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +24,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED)
-            initSmsReceiver()
+        val estsApp = this.application
+        if (estsApp is ESTSApplication) estsApp.attachSmsListener(this)
     }
 
     override fun onPause() {
@@ -46,8 +41,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        smsBReceiver?.setListener(null)
-        unregisterReceiver(smsBReceiver)
         super.onDestroy()
     }
 
@@ -79,7 +72,11 @@ class MainActivity : AppCompatActivity() {
                     MY_PERMISSIONS_REQUEST_SEND_STOP_SMS -> sendSimpleCommand(MY_PERMISSIONS_REQUEST_SEND_STOP_SMS)
                     MY_PERMISSIONS_REQUEST_SEND_STATUS_SMS -> sendSimpleCommand(MY_PERMISSIONS_REQUEST_SEND_STATUS_SMS)
                 }
-                initSmsReceiver()
+                val estsApp = this.application
+                if (estsApp is ESTSApplication) {
+                    estsApp.initSmsReceiver()
+                    estsApp.attachSmsListener(this)
+                }
             } else {
                 // permission denied, boo! Disable the functionality that depends on this permission.
                 val builder = AlertDialog.Builder(this)
@@ -119,20 +116,6 @@ class MainActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
         builder.create().show()
-    }
-
-    private fun initSmsReceiver() {
-        if (smsBReceiver != null) return
-        smsBReceiver = SMSBReceiver()
-        registerReceiver(smsBReceiver, IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION))
-        smsBReceiver!!.setListener(object : SMSBReceiver.Listener {
-            override fun onTextReceived(text: String) {
-                if (Utility.tryParseStart(this@MainActivity, text))
-                    return
-                if (Utility.tryParseStatus(this@MainActivity, text))
-                    return
-            }
-        })
     }
 
     fun startActivityTap(view: View){
