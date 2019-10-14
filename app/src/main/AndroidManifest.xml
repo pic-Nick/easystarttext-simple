@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.easystarttextsimple">
 
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
+        android:name=".ESTSApplication"
         android:allowBackup="true"
         android:fullBackupContent="@xml/my_backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".ESTSApplication"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".SettingsActivity"
@@ -40,12 +40,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Declare SMS Broadcast receiver -->
-        <!--<receiver android:name=".SMSBReceiver" >
-            <intent-filter android:priority="999" >
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-            </intent-filter>
-        </receiver>-->
     </application>
 
 </manifest>
