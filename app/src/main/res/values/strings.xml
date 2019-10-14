@@ -48,5 +48,6 @@
     <string name="msg_oper_error">Encountered error.</string>
     <string name="msg_oper_temperature">\nCoolant temperature</string>
     <string name="msg_oper_voltage">\nOn-board voltage</string>
-    <string name="msg_oper_started">Heater has been started.</string>
+    <string name="msg_oper_started">The heater was started.</string>
+    <string name="msg_oper_stopped">The heater was stopped.</string>
 </resources>

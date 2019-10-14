@@ -70,6 +70,20 @@ class Utility {
             return true
         }
 
+        fun tryParseStop(parentActivity: Activity, smsText: String): Boolean {
+            if (smsText.toUpperCase() != parentActivity.getString(R.string.sms_stop))
+                return false
+            val builder = AlertDialog.Builder(parentActivity)
+            builder.setMessage(parentActivity.getString(R.string.msg_oper_stopped))
+                .setTitle(R.string.msg_operation_status)
+                .setCancelable(true)
+                .setNegativeButton(parentActivity.getString(R.string.button_ok)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+            builder.create().show()
+            return true
+        }
+
         fun tryParseStatus(parentActivity: Activity, smsText: String): Boolean {
             val prtOn = parentActivity.getString(R.string.sms_status_on)
             val prtOff = parentActivity.getString(R.string.sms_status_off)
