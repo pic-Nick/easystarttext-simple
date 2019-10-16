@@ -43,6 +43,8 @@ class ESTSApplication : Application(), LifecycleObserver {
             override fun onTextReceived(text: String) {
                 if (Utility.tryParseStart(activity, text))
                     return
+                if (Utility.tryParseStop(activity, text))
+                    return
                 if (Utility.tryParseStatus(activity, text))
                     return
             }

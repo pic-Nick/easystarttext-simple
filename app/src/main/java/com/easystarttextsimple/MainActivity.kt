@@ -59,6 +59,12 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 true
             }
+            R.id.action_timers -> {
+                intent = Intent(this, StartActivity::class.java)
+                    .putExtra(EXTRA_SETTINGS_GROUPS, R.xml.timers_preferences)
+                startActivity(intent)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

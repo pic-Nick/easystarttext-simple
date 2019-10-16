@@ -2,6 +2,7 @@ package com.easystarttextsimple
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -14,9 +15,10 @@ class StartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_activity)
+        val settingsGroup = intent.getIntExtra(EXTRA_SETTINGS_GROUPS, R.xml.start_preferences)
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.startPrefsLayout, StartSettingsFragment())
+            .replace(R.id.startPrefsLayout, StartSettingsFragment(settingsGroup))
             .commit()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -89,9 +91,15 @@ class StartActivity : AppCompatActivity() {
         }
     }
 
-    class StartSettingsFragment : PreferenceFragmentCompat() {
+    class StartSettingsFragment(settingsGroup: Int) : PreferenceFragmentCompat() {
+        private val sGroup = settingsGroup
+
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.start_preferences, rootKey)
+            try {
+                setPreferencesFromResource(sGroup, rootKey)
+            } catch (e: Exception) {
+                Log.e("START", e.message, e)
+            }
         }
     }
 }
