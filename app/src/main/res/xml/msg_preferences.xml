@@ -2,10 +2,9 @@
 
     <PreferenceCategory app:title="@string/messages_header">
 
-        <EditTextPreference
+        <com.easystarttextsimple.ContactPreference
             app:key="@string/pref_phone_number_key"
-            app:title="@string/dev_phone_num"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/dev_phone_num" />
 
     </PreferenceCategory>
 
