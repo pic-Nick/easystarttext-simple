@@ -8,8 +8,8 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -19,15 +19,15 @@ import androidx.preference.PreferenceDialogFragmentCompat
 class ContactPreferenceDialog : PreferenceDialogFragmentCompat() {
     private val REQUEST_PICK_CONTACT = 1200
     private lateinit var mContactPhone: EditText
-    private lateinit var mContactButton: Button
+    private lateinit var mContactButton: ImageButton
     private val phoneRegex = "[^0-9+]".toRegex()
 
     companion object {
         fun newInstance(key: String) : ContactPreferenceDialog {
             val fragment = ContactPreferenceDialog()
-            val b = Bundle(1)
-            b.putString(ARG_KEY, key)
-            fragment.arguments = b
+            fragment.arguments = Bundle(1).apply {
+                putString(ARG_KEY, key)
+            }
             return fragment
         }
     }

@@ -30,10 +30,14 @@ class SettingsActivity : AppCompatActivity() {
                 addPreferencesFromResource(R.xml.msg_preferences)
                 addPreferencesFromResource(R.xml.start_preferences)
             }
-//            val phonePreference: EditTextPreference? = findPreference(getString(R.string.pref_phone_number_key))
-//            phonePreference?.setOnBindEditTextListener {
-//                editText -> editText.inputType = InputType.TYPE_CLASS_PHONE
-//            }
+            val phonePreference: ContactPreference? = findPreference(getString(R.string.pref_phone_number_key))
+            phonePreference?.summaryProvider = Preference.SummaryProvider<ContactPreference> { preference ->
+                val contact = preference.getContact()
+                if (contact.isEmpty())
+                    getString(R.string.phone_number_pref_notset_hint)
+                else
+                    contact
+            }
         }
 
         override fun onDisplayPreferenceDialog(preference: Preference?) {
@@ -50,7 +54,7 @@ class SettingsActivity : AppCompatActivity() {
             if (dialogFragment != null) {
                 dialogFragment.setTargetFragment(this, 0)
                 this.fragmentManager?.let { dialogFragment.show(it, "android.support.v7.preference.PreferenceFragment.DIALOG") }
-            } else {
+            } else {123456789
                 // Could not be handled here. Try with the super method.
                 super.onDisplayPreferenceDialog(preference)
             }

@@ -22,6 +22,7 @@ class ContactPreference(context: Context, attrs: AttributeSet?, defStyleAttr: In
     fun setContact(contact: String) {
         mContactPhone = contact    // Save to Shared Preferences
         persistString(contact)
+        notifyChanged()
     }
 
     override fun onGetDefaultValue(a: TypedArray, index: Int): Any {

@@ -25,6 +25,7 @@
     <string name="start_mode_summary_on">Yes. Warm up the engine and the salon</string>
     <string name="title_activity_settings">Settings</string>
     <string name="phone_number_hint">Phone number</string>
+    <string name="phone_number_pref_notset_hint">Not set</string>
 
     <string name="timer_1_onoff">Timer 1</string>
     <string name="timer_1_onoff_summary_on">Switched On</string>
