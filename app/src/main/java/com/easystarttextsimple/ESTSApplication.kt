@@ -28,8 +28,10 @@ class ESTSApplication : Application(), LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun onAppBackgrounded() {
-        smsBReceiver?.setListener(null)
-        unregisterReceiver(smsBReceiver)
+        smsBReceiver?.let {
+            it.setListener(null)
+            unregisterReceiver(it)
+        }
     }
 
     fun initSmsReceiver() {
@@ -49,13 +51,5 @@ class ESTSApplication : Application(), LifecycleObserver {
                     return
             }
         })
-    }
-
-    fun getSomeVariable(): SMSBReceiver? {
-        return smsBReceiver
-    }
-
-    fun setSomeVariable(smsBReceiver: SMSBReceiver) {
-        this.smsBReceiver = smsBReceiver
     }
 }

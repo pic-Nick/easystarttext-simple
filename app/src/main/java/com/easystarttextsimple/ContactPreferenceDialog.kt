@@ -66,18 +66,17 @@ class ContactPreferenceDialog : PreferenceDialogFragmentCompat() {
 
         mContactButton = view.findViewById(R.id.choose_contact_button)
         mContactButton.setOnClickListener {
-            val activity = dialog?.ownerActivity
-            activity?.let {
-                if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            dialog?.ownerActivity?.let {
+                if (ContextCompat.checkSelfPermission(it, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
                     // Permission is not granted. Should we show an explanation?
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.READ_CONTACTS)) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(it, Manifest.permission.READ_CONTACTS)) {
                         // Show an explanation to the user *asynchronously* -- don't block
                         // this thread waiting for the user's response! After the user
                         // sees the explanation, try again to request the permission.
-                        val builder = AlertDialog.Builder(activity)
+                        val builder = AlertDialog.Builder(it)
                         builder.setMessage(R.string.msg_explain_contacts_permission)
                             .setCancelable(false)
-                            .setNegativeButton(activity.getString(R.string.button_ok)) { dialog, _ ->
+                            .setNegativeButton(it.getString(R.string.button_ok)) { dialog, _ ->
                                 this.requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS), MY_PERMISSIONS_REQUEST_READ_CONTACTS)
                                 dialog.dismiss()
                             }
@@ -97,8 +96,12 @@ class ContactPreferenceDialog : PreferenceDialogFragmentCompat() {
 
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_PICK_CONTACT) {
             var phoneNum = data?.let { getContactNumber(it) }
-            phoneNum = phoneNum?.replace(phoneRegex, "")
-            mContactPhone.setText(phoneNum)
+            try {
+                phoneNum = phoneNum?.replace(phoneRegex, "")
+                mContactPhone.setText(phoneNum)
+            } catch (e: Exception) {
+                Toast.makeText(context, "Error stripping phone number ${phoneNum}!", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
