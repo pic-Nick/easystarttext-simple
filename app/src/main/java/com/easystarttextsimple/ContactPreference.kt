@@ -25,6 +25,13 @@ class ContactPreference(context: Context, attrs: AttributeSet?, defStyleAttr: In
         notifyChanged()
     }
 
+    override fun getSummary(): CharSequence {
+        return if (mContactPhone.isEmpty())
+            context.getString(R.string.phone_number_pref_notset_hint)
+        else
+            mContactPhone
+    }
+
     override fun onGetDefaultValue(a: TypedArray, index: Int): Any {
         // Default value from attribute. Fallback value is set to "".
         return a.getString(index) ?: ""

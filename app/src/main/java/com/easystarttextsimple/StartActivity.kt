@@ -2,7 +2,6 @@ package com.easystarttextsimple
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -100,23 +99,6 @@ class StartActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             try {
                 setPreferencesFromResource(sGroup, rootKey)
-
-                val timePreference: TimePreference? = findPreference(getString(R.string.pref_timer_1_time_key))
-                timePreference?.summaryProvider = Preference.SummaryProvider<TimePreference> { preference ->
-                    val minutesAfterMidnight = preference.getTime()
-                    if (minutesAfterMidnight != null) {
-                        var hours = minutesAfterMidnight / 60
-                        val minutes = minutesAfterMidnight % 60
-                        if (DateFormat.is24HourFormat(context))
-                            "${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}"
-                        else {
-                            val ampm = if (hours >= 12) {hours -= 12; "PM"} else "AM"
-                            if (hours == 0) hours = 12
-                            "${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} $ampm"
-                        }
-                    } else
-                        getString(R.string.phone_number_pref_notset_hint)
-                }
             } catch (e: Exception) {
                 Log.e("START", e.message, e)
             }

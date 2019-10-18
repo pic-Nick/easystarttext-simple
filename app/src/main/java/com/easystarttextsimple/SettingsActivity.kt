@@ -30,14 +30,6 @@ class SettingsActivity : AppCompatActivity() {
                 addPreferencesFromResource(R.xml.msg_preferences)
                 addPreferencesFromResource(R.xml.start_preferences)
             }
-            val phonePreference: ContactPreference? = findPreference(getString(R.string.pref_phone_number_key))
-            phonePreference?.summaryProvider = Preference.SummaryProvider<ContactPreference> { preference ->
-                val contact = preference.getContact()
-                if (contact.isEmpty())
-                    getString(R.string.phone_number_pref_notset_hint)
-                else
-                    contact
-            }
         }
 
         override fun onDisplayPreferenceDialog(preference: Preference?) {
