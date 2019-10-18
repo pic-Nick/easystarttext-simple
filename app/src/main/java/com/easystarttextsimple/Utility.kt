@@ -16,6 +16,7 @@ const val MY_PERMISSIONS_REQUEST_SEND_START_SMS = 1000
 const val MY_PERMISSIONS_REQUEST_SEND_STOP_SMS = 1001
 const val MY_PERMISSIONS_REQUEST_SEND_STATUS_SMS = 1002
 const val MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1003
+const val MY_PERMISSIONS_REQUEST_SEND_TIMERS_SMS = 1004
 
 const val EXTRA_SETTINGS_GROUPS = "com.easystarttextsimple.EXTRA_SETTINGS_GROUPS"
 const val TAG = "Util"
@@ -144,6 +145,10 @@ class Utility {
         }
 
         fun composeStatusCommand(): String {
+            return "09*"
+        }
+
+        fun composeSetTimerCommand(timers: Timers): String {
             return "09*"
         }
 

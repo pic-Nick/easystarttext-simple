@@ -98,7 +98,19 @@ class StartActivity : AppCompatActivity() {
                             Toast.makeText(this, R.string.msg_command_sent, Toast.LENGTH_LONG).show()
                 }
                 R.xml.timers_preferences -> {
-
+                    val timer1 = sharedPreferences.getBoolean(getString(R.string.pref_timer_1_key), false)
+                    val timer1days = sharedPreferences.getStringSet(getString(R.string.pref_timer_1_days_key), setOf())
+                    val timer1time = sharedPreferences.getString(getString(R.string.pref_timer_1_time_key), "")
+                    val timer2 = sharedPreferences.getBoolean(getString(R.string.pref_timer_2_key), false)
+                    val timer2days = sharedPreferences.getStringSet(getString(R.string.pref_timer_2_days_key), setOf())
+                    val timer2time = sharedPreferences.getString(getString(R.string.pref_timer_2_time_key), "")
+                    val timer3 = sharedPreferences.getBoolean(getString(R.string.pref_timer_3_key), false)
+                    val timer3days = sharedPreferences.getStringSet(getString(R.string.pref_timer_3_days_key), setOf())
+                    val timer3time = sharedPreferences.getString(getString(R.string.pref_timer_3_time_key), "")
+                    val command = Utility.composeSetTimerCommand(Timers(TimerData(timer1, timer1days, timer1time), TimerData(timer2, timer2days, timer2time), TimerData(timer3, timer3days, timer3time)))
+                    if (Utility.tryRequestSmsPermission(this, MY_PERMISSIONS_REQUEST_SEND_TIMERS_SMS))
+                        if (Utility.sendSmsCommand(phoneNumber, command))
+                            Toast.makeText(this, R.string.msg_command_sent, Toast.LENGTH_LONG).show()
                 }
             }
         }
