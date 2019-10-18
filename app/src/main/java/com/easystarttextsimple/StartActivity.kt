@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.preference.MultiSelectListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
@@ -99,6 +100,21 @@ class StartActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             try {
                 setPreferencesFromResource(sGroup, rootKey)
+
+                val daysPreference: MultiSelectListPreference? = findPreference(getString(R.string.pref_timer_1_days_key))
+                daysPreference?.summaryProvider = Preference.SummaryProvider<MultiSelectListPreference> { preference ->
+                    val weekDays = preference.values
+                    if (weekDays.isNotEmpty()) {
+                        weekDays.sortedWith(Comparator { o1, o2 ->
+                            when {
+                                preference.findIndexOfValue(o1) > preference.findIndexOfValue(o2) -> 1
+                                preference.findIndexOfValue(o1) < preference.findIndexOfValue(o2) -> -1
+                                else -> 0
+                            }
+                        }).joinToString(", ") { preference.entries[preference.findIndexOfValue(it)] }
+                    } else
+                        getString(R.string.phone_number_pref_notset_hint)
+                }
             } catch (e: Exception) {
                 Log.e("START", e.message, e)
             }

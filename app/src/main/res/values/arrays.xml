@@ -31,12 +31,12 @@
         <item>SU</item>
     </string-array>
     <string-array name="days_of_week">
-        <item>MO</item>
-        <item>TU</item>
-        <item>WE</item>
-        <item>TH</item>
-        <item>FR</item>
-        <item>SA</item>
-        <item>SU</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
     </string-array>
 </resources>
