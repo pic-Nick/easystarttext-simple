@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import androidx.preference.DialogPreference
 
 class TimePreference(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : DialogPreference(context, attrs, defStyleAttr, defStyleRes) {
-    private var mTime: Int = 0
+    private var mTime: Int = -1
     private val mDialogLayoutResId = R.layout.pref_dialog_time
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, defStyleAttr)
@@ -15,13 +15,14 @@ class TimePreference(context: Context, attrs: AttributeSet?, defStyleAttr: Int, 
 
     constructor(context: Context) : this(context, null)
 
-    fun getTime(): Int {
-        return mTime
+    fun getTime(): Int? {
+        return if (mTime < 0) null else mTime
     }
 
-    fun setTime(time: Int) {
-        mTime = time    // Save to Shared Preferences
-        persistInt(time)
+    fun setTime(time: Int?) {
+        mTime = time ?: -1   // Save to Shared Preferences
+        persistInt(time ?: -1)
+        notifyChanged()
     }
 
     override fun onGetDefaultValue(a: TypedArray, index: Int): Any {

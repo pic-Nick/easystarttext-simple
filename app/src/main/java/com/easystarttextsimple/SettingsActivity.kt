@@ -54,7 +54,7 @@ class SettingsActivity : AppCompatActivity() {
             if (dialogFragment != null) {
                 dialogFragment.setTargetFragment(this, 0)
                 this.fragmentManager?.let { dialogFragment.show(it, "android.support.v7.preference.PreferenceFragment.DIALOG") }
-            } else {123456789
+            } else {
                 // Could not be handled here. Try with the super method.
                 super.onDisplayPreferenceDialog(preference)
             }

@@ -31,6 +31,7 @@
     <string name="timer_1_onoff_summary_on">Switched On</string>
     <string name="timer_1_onoff_summary_off">Switched Off</string>
     <string name="timer_1_days">Days of week</string>
+    <string name="timer_1_time">Start time</string>
 
     <!-- Messages preferences -->
     <string name="dev_phone_num">Heater phone number</string>
