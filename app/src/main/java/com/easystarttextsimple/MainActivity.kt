@@ -126,6 +126,7 @@ class MainActivity : AppCompatActivity() {
 
     fun startActivityTap(view: View){
         intent = Intent(this, StartActivity::class.java)
+            .putExtra(EXTRA_SETTINGS_GROUPS, R.xml.start_preferences)
         startActivity(intent)
     }
 

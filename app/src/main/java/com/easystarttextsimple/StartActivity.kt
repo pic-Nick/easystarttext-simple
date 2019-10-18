@@ -12,13 +12,16 @@ import androidx.preference.MultiSelectListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import kotlin.properties.Delegates
 
 class StartActivity : AppCompatActivity() {
+
+    private var settingsGroup by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_activity)
-        val settingsGroup = intent.getIntExtra(EXTRA_SETTINGS_GROUPS, R.xml.start_preferences)
+        settingsGroup = intent.getIntExtra(EXTRA_SETTINGS_GROUPS, R.xml.start_preferences)
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.startPrefsLayout, StartSettingsFragment(settingsGroup))
@@ -85,12 +88,19 @@ class StartActivity : AppCompatActivity() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val phoneNumber = Utility.tryGetPhoneNumber(this, sharedPreferences)
         if (phoneNumber != null) {
-            val startDuration = sharedPreferences.getString(getString(R.string.pref_duration_key), "20")!!
-            val warmUpSalon = sharedPreferences.getBoolean(getString(R.string.pref_warm_salon_key), false)
-            val command = Utility.composeStartCommand(startDuration, warmUpSalon)
-            if (Utility.tryRequestSmsPermission(this, MY_PERMISSIONS_REQUEST_SEND_START_SMS))
-                if (Utility.sendSmsCommand(phoneNumber, command))
-                    Toast.makeText(this, R.string.msg_command_sent, Toast.LENGTH_LONG).show()
+            when (settingsGroup) {
+                R.xml.start_preferences -> {
+                    val startDuration = sharedPreferences.getString(getString(R.string.pref_duration_key), "20")!!
+                    val warmUpSalon = sharedPreferences.getBoolean(getString(R.string.pref_warm_salon_key), false)
+                    val command = Utility.composeStartCommand(startDuration, warmUpSalon)
+                    if (Utility.tryRequestSmsPermission(this, MY_PERMISSIONS_REQUEST_SEND_START_SMS))
+                        if (Utility.sendSmsCommand(phoneNumber, command))
+                            Toast.makeText(this, R.string.msg_command_sent, Toast.LENGTH_LONG).show()
+                }
+                R.xml.timers_preferences -> {
+
+                }
+            }
         }
     }
 
