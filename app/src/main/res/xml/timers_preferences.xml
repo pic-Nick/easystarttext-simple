@@ -6,8 +6,8 @@
             app:defaultValue="false"
             app:key="@string/pref_timer_1_key"
             app:title="@string/timer_1_onoff"
-            app:summaryOff="@string/timer_1_onoff_summary_off"
-            app:summaryOn="@string/timer_1_onoff_summary_on"/>
+            app:summaryOff="@string/timer_onoff_summary_off"
+            app:summaryOn="@string/timer_onoff_summary_on"/>
 
         <MultiSelectListPreference
             app:defaultValue="@array/empty_array"
@@ -15,12 +15,55 @@
             app:entries="@array/days_of_week"
             app:entryValues="@array/days_of_week_val"
             app:key="@string/pref_timer_1_days_key"
-            app:title="@string/timer_1_days" />
+            app:title="@string/timer_days"
+            app:dialogTitle="@string/timer_days_choose"/>
 
         <com.easystarttextsimple.TimePreference
             app:key="@string/pref_timer_1_time_key"
-            app:title="@string/timer_1_time"
+            app:title="@string/timer_time"
             app:dependency="@string/pref_timer_1_key"/>
+
+        <SwitchPreference
+            app:defaultValue="false"
+            app:key="@string/pref_timer_2_key"
+            app:title="@string/timer_2_onoff"
+            app:summaryOff="@string/timer_onoff_summary_off"
+            app:summaryOn="@string/timer_onoff_summary_on"/>
+
+        <MultiSelectListPreference
+            app:defaultValue="@array/empty_array"
+            app:dependency="@string/pref_timer_2_key"
+            app:entries="@array/days_of_week"
+            app:entryValues="@array/days_of_week_val"
+            app:key="@string/pref_timer_2_days_key"
+            app:title="@string/timer_days"
+            app:dialogTitle="@string/timer_days_choose"/>
+
+        <com.easystarttextsimple.TimePreference
+            app:key="@string/pref_timer_2_time_key"
+            app:title="@string/timer_time"
+            app:dependency="@string/pref_timer_2_key"/>
+
+        <SwitchPreference
+            app:defaultValue="false"
+            app:key="@string/pref_timer_3_key"
+            app:title="@string/timer_3_onoff"
+            app:summaryOff="@string/timer_onoff_summary_off"
+            app:summaryOn="@string/timer_onoff_summary_on"/>
+
+        <MultiSelectListPreference
+            app:defaultValue="@array/empty_array"
+            app:dependency="@string/pref_timer_3_key"
+            app:entries="@array/days_of_week"
+            app:entryValues="@array/days_of_week_val"
+            app:key="@string/pref_timer_3_days_key"
+            app:title="@string/timer_days"
+            app:dialogTitle="@string/timer_days_choose"/>
+
+        <com.easystarttextsimple.TimePreference
+            app:key="@string/pref_timer_3_time_key"
+            app:title="@string/timer_time"
+            app:dependency="@string/pref_timer_3_key"/>
 
     </PreferenceCategory>
 

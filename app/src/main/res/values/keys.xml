@@ -8,4 +8,10 @@
     <string name="pref_timer_1_key">timer_1</string>
     <string name="pref_timer_1_days_key">timer_1_days</string>
     <string name="pref_timer_1_time_key">timer_1_time</string>
+    <string name="pref_timer_2_key">timer_2</string>
+    <string name="pref_timer_2_days_key">timer_2_days</string>
+    <string name="pref_timer_2_time_key">timer_2_time</string>
+    <string name="pref_timer_3_key">timer_3</string>
+    <string name="pref_timer_3_days_key">timer_3_days</string>
+    <string name="pref_timer_3_time_key">timer_3_time</string>
 </resources>

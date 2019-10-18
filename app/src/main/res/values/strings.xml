@@ -28,10 +28,13 @@
     <string name="phone_number_pref_notset_hint">Not set</string>
 
     <string name="timer_1_onoff">Timer 1</string>
-    <string name="timer_1_onoff_summary_on">Switched On</string>
-    <string name="timer_1_onoff_summary_off">Switched Off</string>
-    <string name="timer_1_days">Days of week</string>
-    <string name="timer_1_time">Start time</string>
+    <string name="timer_2_onoff">Timer 2</string>
+    <string name="timer_3_onoff">Timer 3</string>
+    <string name="timer_onoff_summary_on">Switched On</string>
+    <string name="timer_onoff_summary_off">Switched Off</string>
+    <string name="timer_days">Days of week</string>
+    <string name="timer_days_choose">Choose days of week</string>
+    <string name="timer_time">Start time</string>
 
     <!-- Messages preferences -->
     <string name="dev_phone_num">Heater phone number</string>

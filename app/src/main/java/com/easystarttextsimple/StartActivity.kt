@@ -101,19 +101,21 @@ class StartActivity : AppCompatActivity() {
             try {
                 setPreferencesFromResource(sGroup, rootKey)
 
-                val daysPreference: MultiSelectListPreference? = findPreference(getString(R.string.pref_timer_1_days_key))
-                daysPreference?.summaryProvider = Preference.SummaryProvider<MultiSelectListPreference> { preference ->
-                    val weekDays = preference.values
-                    if (weekDays.isNotEmpty()) {
-                        weekDays.sortedWith(Comparator { o1, o2 ->
-                            when {
-                                preference.findIndexOfValue(o1) > preference.findIndexOfValue(o2) -> 1
-                                preference.findIndexOfValue(o1) < preference.findIndexOfValue(o2) -> -1
-                                else -> 0
-                            }
-                        }).joinToString(", ") { preference.entries[preference.findIndexOfValue(it)] }
-                    } else
-                        getString(R.string.phone_number_pref_notset_hint)
+                arrayOf(R.string.pref_timer_1_days_key, R.string.pref_timer_2_days_key, R.string.pref_timer_3_days_key).forEach {
+                    val daysPreference: MultiSelectListPreference? = findPreference(getString(it))
+                    daysPreference?.summaryProvider = Preference.SummaryProvider<MultiSelectListPreference> { preference ->
+                        val weekDays = preference.values
+                        if (weekDays.isNotEmpty()) {
+                            weekDays.sortedWith(Comparator { o1, o2 ->
+                                when {
+                                    preference.findIndexOfValue(o1) > preference.findIndexOfValue(o2) -> 1
+                                    preference.findIndexOfValue(o1) < preference.findIndexOfValue(o2) -> -1
+                                    else -> 0
+                                }
+                            }).joinToString(", ") { preference.entries[preference.findIndexOfValue(it)] }
+                        } else
+                            getString(R.string.phone_number_pref_notset_hint)
+                    }
                 }
             } catch (e: Exception) {
                 Log.e("START", e.message, e)
