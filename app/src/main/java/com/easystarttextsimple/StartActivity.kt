@@ -58,6 +58,7 @@ class StartActivity : AppCompatActivity() {
                 // permission was granted, yay! Do it.
                 when (myPermissionsRequestCode) {
                     MY_PERMISSIONS_REQUEST_SEND_START_SMS -> sendStartCommand()
+                    MY_PERMISSIONS_REQUEST_SEND_TIMERS_SMS -> sendStartCommand()
                 }
                 val estsApp = this.application
                 if (estsApp is ESTSApplication) {
