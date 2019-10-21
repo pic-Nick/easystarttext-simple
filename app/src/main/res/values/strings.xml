@@ -1,63 +1,6 @@
 <resources>
-    <string name="app_name">EasyStart Text Simple</string>
-    <string name="logo">Logo</string>
-
-    <!-- Buttons titles -->
-    <string name="button_start">Start</string>
-    <string name="button_send">Send command</string>
-    <string name="button_stop">Stop</string>
-    <string name="button_status">Status</string>
-    <string name="button_yes">Yes</string>
-    <string name="button_no">No</string>
-    <string name="button_ok">OK</string>
-
-    <string name="title_activity_start">Start</string>
-
-    <!-- Preference titles -->
-    <string name="messages_header">Messaging</string>
-    <string name="start_header">Start</string>
-    <string name="timers_header">Timers</string>
-
-    <!-- Preference texts -->
-    <string name="start_duration">Duration</string>
-    <string name="start_mode">Warm salon</string>
-    <string name="start_mode_summary_off">No. Only warm up the engine</string>
-    <string name="start_mode_summary_on">Yes. Warm up the engine and the salon</string>
-    <string name="title_activity_settings">Settings</string>
-    <string name="phone_number_hint">Phone number</string>
-    <string name="phone_number_pref_notset_hint">Not set</string>
-
-    <string name="timer_1_onoff">Timer 1</string>
-    <string name="timer_2_onoff">Timer 2</string>
-    <string name="timer_3_onoff">Timer 3</string>
-    <string name="timer_onoff_summary_on">Switched On</string>
-    <string name="timer_onoff_summary_off">Switched Off</string>
-    <string name="timer_days">Days of week</string>
-    <string name="timer_days_choose">Choose days of week</string>
-    <string name="timer_time">Start time</string>
-
-    <!-- Messages preferences -->
-    <string name="dev_phone_num">Heater phone number</string>
-
-    <string name="menu_settings">App Settings</string>
-    <string name="menu_timers">Timers</string>
-
-    <!-- Messages -->
-    <string name="msg_need_configure_phone">You need to configure heater\'s phone number</string>
-    <string name="msg_explain_sms_permission">Permission to send SMS massages is essential for this application. Application sends commands to heater via SMS messages. Please grant this permission for the application to work.</string>
-    <string name="msg_failed_sms_permission">Permission to send SMS is essential for this application.</string>
-    <string name="msg_confirm_request">Please, confirm your request to the heater.</string>
-    <string name="msg_command_sent">Command has been sent</string>
-    <string name="msg_operation_status">Operation status</string>
-    <string name="msg_explain_contacts_permission">Permission to read contacts is necessary for a more convenient way to select a phone number. If you will not grant this permission you will still be able you specify this number manually.</string>
-    <string name="msg_failed_contacts_permission">Permission not granted. Access to contacts disabled.</string>
-
-    <string name="msg_oper_running_with_salon">Running with salon heating.</string>
-    <string name="msg_oper_running_without_salon">Running without salon heating.</string>
-    <string name="msg_oper_off">Switched off.</string>
-    <string name="msg_oper_error">Encountered error.</string>
-    <string name="msg_oper_temperature">\nCoolant temperature</string>
-    <string name="msg_oper_voltage">\nOn-board voltage</string>
-    <string name="msg_oper_started">The heater was started.</string>
-    <string name="msg_oper_stopped">The heater was stopped.</string>
+    <string name="app_name">easystarttextsimple</string>
+    <string name="title_home">Home</string>
+    <string name="title_timers">Timers</string>
+    <string name="title_settings">Settings</string>
 </resources>
