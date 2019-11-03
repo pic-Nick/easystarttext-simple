@@ -27,8 +27,8 @@ class Utility {
             val phoneNumber = sharedPreferences.getString(parentActivity.getString(R.string.pref_phone_number_key), null)
             return if (phoneNumber?.isNotBlank() == true) phoneNumber else {
                 Toast.makeText(parentActivity, R.string.msg_need_configure_phone, Toast.LENGTH_LONG).show()
-                parentActivity.startActivity(Intent(parentActivity, SettingsActivity::class.java)
-                    .putExtra(EXTRA_SETTINGS_GROUPS, intArrayOf(R.xml.msg_preferences)))
+//                parentActivity.startActivity(Intent(parentActivity, SettingsActivity::class.java)
+//                    .putExtra(EXTRA_SETTINGS_GROUPS, intArrayOf(R.xml.msg_preferences)))
                 null
             }
         }

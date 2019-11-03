@@ -5,27 +5,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 import com.easystarttextsimple.R
+import com.easystarttextsimple.ui_prefs.ContactPreference
+import com.easystarttextsimple.ui_prefs.ContactPreferenceDialog
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : PreferenceFragmentCompat() {
 
-    private lateinit var settingsViewModel: SettingsViewModel
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        addPreferencesFromResource(R.xml.msg_preferences)
+        addPreferencesFromResource(R.xml.start_preferences)
+    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        settingsViewModel =
-            ViewModelProviders.of(this).get(SettingsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_settings, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
-        settingsViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
-        return root
+    override fun onDisplayPreferenceDialog(preference: Preference?) {
+        // Try if the preference is one of our custom Preferences
+        var dialogFragment: DialogFragment? = null
+        if (preference is ContactPreference) {
+            dialogFragment = ContactPreferenceDialog.newInstance(preference.key)
+        }
+
+        // If it was one of our custom Preferences, show its dialog
+        if (dialogFragment != null) {
+            dialogFragment.setTargetFragment(this, 0)
+            this.fragmentManager?.let { dialogFragment.show(it, "android.support.v7.preference.PreferenceFragment.DIALOG") }
+        } else {
+            // Could not be handled here. Try with the super method.
+            super.onDisplayPreferenceDialog(preference)
+        }
     }
 }
